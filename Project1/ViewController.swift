@@ -15,6 +15,7 @@ class ViewController: UITableViewController {
         
         title = "Storm Viwer"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareToFriend))
         
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
@@ -46,6 +47,12 @@ class ViewController: UITableViewController {
             vc.selectedImage = pictures[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    @objc func shareToFriend () {
+        let vc = UIActivityViewController(activityItems: ["Use our app too!"], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
     }
 }
 
